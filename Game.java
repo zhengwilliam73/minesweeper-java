@@ -6,12 +6,18 @@ public class Game {
     int cols = 10;
     Timer gameTimer;
     int elapsedTime = 0;
+    boolean timerStarted = false;
     Grid[][] grid = new Grid[rows][cols];
 
     JFrame frame = new JFrame("Minesweeper");
     JPanel board = new JPanel();
+
     JPanel timerPanel = new JPanel();
     JLabel timerLabel = new JLabel("Seconds: 0");
+
+    JPanel labelPanel = new JPanel();
+    JButton resetButton = new JButton("Reset");
+    JLabel labelLabel = new JLabel("Left Click = Reveal || Right Click = Flag");
 
         Game() {
             //Frame setup
@@ -46,6 +52,14 @@ public class Game {
                     else {
                         tile.setBackground(Color.GRAY);
                     }
+
+                    tile.addActionListener(e -> {
+                        if (!timerStarted) {
+                        startTimer(); // Start the timer when a tile is clicked
+                        timerStarted = true;
+                        }
+                        
+                    });
     
                     board.add(tile);
                     grid[i][j] = tile;
