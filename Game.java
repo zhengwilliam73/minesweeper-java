@@ -21,7 +21,7 @@ public class Game {
 
         Game() {
             //Frame setup
-            frame.setSize(600, 800);
+            frame.setSize(600, 650);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setLayout(new BorderLayout());            
             frame.setLocationRelativeTo(null);
@@ -113,6 +113,12 @@ public class Game {
                 }
             }
         }
+
+        public void removeTile(int x, int y) {
+            Grid tile = grid[x][y];
+            
+        }
+        
     }
 
     
