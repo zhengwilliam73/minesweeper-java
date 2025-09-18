@@ -15,13 +15,13 @@ public class Game {
     JPanel timerPanel = new JPanel();
     JLabel timerLabel = new JLabel("Seconds: 0");
 
-    JPanel labelPanel = new JPanel();
+    JPanel bottomPanel = new JPanel();
     JButton resetButton = new JButton("Reset");
-    JLabel labelLabel = new JLabel("Left Click = Reveal || Right Click = Flag");
+    JLabel explanationLabel = new JLabel("Left Click = Reveal || Right Click = Flag");
 
         Game() {
             //Frame setup
-            frame.setSize(600, 650);
+            frame.setSize(600, 800);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setLayout(new BorderLayout());            
             frame.setLocationRelativeTo(null);
@@ -71,6 +71,16 @@ public class Game {
                 elapsedTime++;
                 timerLabel.setText((String.format("Seconds: " + elapsedTime)));
             });
+
+            //Label panel setup
+            bottomPanel.setLayout(new BorderLayout());
+            bottomPanel.add(resetButton, BorderLayout.WEST);
+            bottomPanel.add(explanationLabel, BorderLayout.EAST);
+            frame.add(bottomPanel, BorderLayout.SOUTH);
+            
+            //Restart button
+            resetButton.addActionListener(e -> resetGame());
+
             frame.setVisible(true);
         }
 
@@ -84,6 +94,25 @@ public class Game {
             gameTimer.stop();
         }
     
+        public void resetGame() {
+            stopTimer();
+            elapsedTime = 0;
+            timerLabel.setText("Seconds: 0");
+            timerStarted = false;
+
+            // Reset tiles
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    grid[i][j].reset();
+                    if ((i + j) % 2 == 0) {
+                        grid[i][j].setBackground(Color.LIGHT_GRAY); 
+                    }
+                    else {
+                        grid[i][j].setBackground(Color.GRAY);
+                    }
+                }
+            }
+        }
     }
 
     

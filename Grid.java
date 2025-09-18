@@ -30,6 +30,16 @@ public class Grid extends JButton {
     }
     public void setOriginalColor(Color color) {
         this.setBackground(this.originalColor);
+
+    }
+
+    //Methods
+    public void reset() {
+        // Reset the tile's state (customize as needed)
+        setEnabled(true);
+        setText("");
+        setBackground(null);
+        // Add any additional reset logic here
     }
 
 }
