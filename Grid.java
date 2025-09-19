@@ -5,6 +5,9 @@ public class Grid extends JButton {
     private int x;
     private int y;
     private Color originalColor;
+    private boolean isMine = false;
+    private boolean isRevealed = false;
+    private boolean isFlagged = false;
     
     //Getters
     public int getXCoord() {
@@ -12,6 +15,15 @@ public class Grid extends JButton {
     }
     public int getYCoord() {
         return y;
+    }
+    public boolean isMine() {
+        return isMine;
+    }
+    public boolean isRevealed() {
+        return isRevealed;
+    }
+    public boolean isFlagged() {
+        return isFlagged;
     }
 
 
@@ -32,14 +44,38 @@ public class Grid extends JButton {
         this.setBackground(this.originalColor);
 
     }
+    public void setMine(boolean isMine) {
+        this.isMine = isMine;
+    }
+    public void setRevealed(boolean isRevealed) {
+        this.isRevealed = isRevealed;
+    }
+    public void setFlagged(boolean isFlagged) {
+        this.isFlagged = isFlagged;
+    }
 
     //Methods
     public void reset() {
-        // Reset the tile's state (customize as needed)
         setEnabled(true);
         setText("");
-        setBackground(null);
-        // Add any additional reset logic here
+        setBackground(originalColor);
+        isMine = false;
+        isRevealed = false;
+        isFlagged = false;
+    }
+
+    public void reveal() {
+        if (!isRevealed && !isFlagged) {
+            isRevealed = true;
+            setEnabled(false);
+        }
+    }
+
+    public void toggleFlag() {
+        if (!isRevealed) {
+            isFlagged = !isFlagged;
+            setText (isFlagged ? "F" : "");
+        }
     }
 
 }
